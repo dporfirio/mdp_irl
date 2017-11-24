@@ -1,5 +1,5 @@
 import numpy as np
-from scipy.optimize import maximize
+from scipy.optimize import minimize
 
 class MDP():
 
@@ -26,7 +26,7 @@ class Action():
 
 class IRL():
 
-	def __init__(mdp, R=np.zeros):
+	def __init__(self, mdp, R=np.zeros):
 		pass
 
 	# # # # # # # # # # # #
@@ -40,3 +40,11 @@ class IRL():
 
 	def solve():
 		pass
+
+	def solve_test(self):
+		x0 = np.array([1.3, 0.7, 0.8, 1.9, 1.2])
+		res = minimize(self.rosen, x0, method='nelder-mead', options={'xtol': 1e-8, 'disp': True})
+
+	def rosen(self, x):
+		"""The Rosenbrock function"""
+		return sum(100.0*(x[1:]-x[:-1]**2.0)**2.0 + (1-x[:-1])**2.0)
